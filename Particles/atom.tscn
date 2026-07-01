@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=3 uid="uid://cjq7uhn23ygli"]
+
+[ext_resource type="PackedScene" uid="uid://c6yr4i738y2kg" path="res://Particles/electron.tscn" id="1_pbdj3"]
+[ext_resource type="Script" uid="uid://drjxcyhvei5p1" path="res://Particles/atom.gd" id="1_xry0d"]
+[ext_resource type="PackedScene" uid="uid://bsvd2l4xswfyh" path="res://Particles/proton.tscn" id="2_624tf"]
+[ext_resource type="PackedScene" uid="uid://bn5xb2lum1yvf" path="res://Particles/neutron.tscn" id="3_624tf"]
+[ext_resource type="Texture2D" uid="uid://df5roecii7r6u" path="res://Images/start.png" id="5_a2nr6"]
+[ext_resource type="Texture2D" uid="uid://cpolrt3magif8" path="res://Images/electron description.png" id="5_xry0d"]
+[ext_resource type="Texture2D" uid="uid://du2r7a248jtma" path="res://Images/Untitled-1.png" id="6_61nh5"]
+[ext_resource type="Texture2D" uid="uid://qdh1gpfgrmxv" path="res://Images/neutron description.png" id="6_a2nr6"]
+[ext_resource type="Texture2D" uid="uid://4lll4ybrpp80" path="res://Images/proton description.png" id="7_61nh5"]
+
+[node name="Atom" type="Node2D"]
+script = ExtResource("1_xry0d")
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -1
+
+[node name="fullBack" type="ColorRect" parent="Background"]
+offset_left = -471.0
+offset_top = -403.0
+offset_right = 927.0
+offset_bottom = 409.0
+mouse_filter = 2
+color = Color(6.2569975e-06, 0.74712074, 0.6842463, 1)
+
+[node name="atomBorder" type="ColorRect" parent="Background"]
+offset_left = -271.0
+offset_top = -262.0
+offset_right = 253.0
+offset_bottom = 262.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="atomBack" type="ColorRect" parent="Background"]
+offset_left = -260.0
+offset_top = -251.0
+offset_right = 241.0
+offset_bottom = 250.0
+mouse_filter = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(220, 0)
+zoom = Vector2(0.98, 0.98)
+
+[node name="Descriptions" type="Node2D" parent="."]
+
+[node name="startD" type="Sprite2D" parent="Descriptions"]
+position = Vector2(527, 139)
+scale = Vector2(0.4050833, 0.40508327)
+texture = ExtResource("5_a2nr6")
+
+[node name="electronD" type="Sprite2D" parent="Descriptions"]
+visible = false
+position = Vector2(527, 4.000002)
+scale = Vector2(0.408, 0.408)
+texture = ExtResource("5_xry0d")
+
+[node name="neutronD" type="Sprite2D" parent="Descriptions"]
+visible = false
+position = Vector2(527, -52.999992)
+scale = Vector2(0.408, 0.408)
+texture = ExtResource("6_a2nr6")
+
+[node name="protonD" type="Sprite2D" parent="Descriptions"]
+visible = false
+position = Vector2(528, 16.999996)
+scale = Vector2(0.408, 0.408)
+texture = ExtResource("7_61nh5")
+
+[node name="ring" type="Sprite2D" parent="."]
+position = Vector2(6.999999, 0)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("6_61nh5")
+
+[node name="Proton" parent="." instance=ExtResource("2_624tf")]
+position = Vector2(-24, -17)
+
+[node name="Neutron" parent="." instance=ExtResource("3_624tf")]
+position = Vector2(12, 24)
+
+[node name="Electron" parent="." instance=ExtResource("1_pbdj3")]
+position = Vector2(-17, -174)
+
+[connection signal="mouse_entered" from="Proton" to="." method="_on_proton_mouse_entered"]
+[connection signal="mouse_exited" from="Proton" to="." method="_on_proton_mouse_exited"]
+[connection signal="mouse_entered" from="Neutron" to="." method="_on_neutron_mouse_entered"]
+[connection signal="mouse_exited" from="Neutron" to="." method="_on_neutron_mouse_exited"]
+[connection signal="mouse_entered" from="Electron" to="." method="_on_electron_mouse_entered"]
+[connection signal="mouse_exited" from="Electron" to="." method="_on_electron_mouse_exited"]
